@@ -14,8 +14,8 @@ export class BoardsController {
     constructor(private boardsService: BoardsService){}
 
     @Get('/')
-    getAllBoard(): Promise<Board[]> {
-        return this.boardsService.getAllBoard();
+    getAllBoard(@GetUser() user: User): Promise<Board[]> {
+        return this.boardsService.getAllBoard(user);
     }
     // @Get('/')
     // getAllBoard(): Board[] {
@@ -47,8 +47,8 @@ export class BoardsController {
     // }
 
     @Delete('/:id')
-    deleteBoard(@Param('id', ParseIntPipe) id:number): Promise<void> {
-        return this.boardsService.deleteBoard(id);
+    deleteBoard(@Param('id', ParseIntPipe) id:number, @GetUser() user: User): Promise<void> {
+        return this.boardsService.deleteBoard(id, user);
     }
     // @Delete('/:id')
     // deleteBoard(@Param('id') id: string): Board{
